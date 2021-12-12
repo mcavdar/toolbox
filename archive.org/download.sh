@@ -11,6 +11,6 @@ do
 	  echo "$p"
 	  links=""
 	  links=$(curl https://archive.org/details/"$p" 2>&1 | grep -oP 'href="\K(.*)_text.pdf(?=" title)')
-	  if [ -z "$links" ]; then echo "there is no *_text.pdf file. trying to download .pdf file"; curl https://archive.org/details/"$p" 2>&1 | grep -oP 'href="\K(.*).pdf(?=" title)' | wget "https://archive.org"{}; else wget "https://archive.org"$links; fi
+	  if [ -z "$links" ]; then echo "there is no *_text.pdf file. trying to download .pdf file"; curl https://archive.org/details/"$p" 2>&1 | grep -oP 'href="\K(.*).pdf(?=" title)' | wget  -nc "https://archive.org"{}; else wget  -nc "https://archive.org"$links; fi
 	done <link_list_$i.txt
 done
